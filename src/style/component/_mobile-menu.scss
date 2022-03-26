@@ -1,0 +1,112 @@
+@use "../default" as *;
+@use "../mixins/button" as btn;
+
+#mobile-menu {
+  display: none;
+
+  @media (max-width: 1024px) {
+    &.active {
+      display: block;
+      position: fixed;
+      z-index: 10;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: $Very-Dark-Blue;
+      opacity: 0.8;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .logo-witch-close {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        svg g {
+          path {
+            fill: #ffffff;
+          }
+          g {
+            circle {
+              fill: #ffffff;
+            }
+            path {
+              fill: $Very-Dark-Blue;
+            }
+          }
+        }
+
+        .close-menu {
+          background-color: transparent;
+          border: none;
+        }
+      }
+
+      .navigations {
+        width: 80%;
+        text-align: center;
+
+        .list-navigation {
+          border-top: 1px solid #ffffff;
+          padding: 2.5% 0;
+
+          .link {
+            color: #ffffff;
+            font-size: 1.8rem;
+          }
+        }
+
+        .list-navigation:last-child {
+          border-bottom: 1px solid #ffffff;
+        }
+      }
+
+      .login {
+        @include btn.button($border: 1px solid #ffffff, $p: 2.5% 0);
+        width: 80%;
+        text-transform: uppercase;
+      }
+
+      .social-media {
+        width: 80%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+    }
+
+    &.active > *:not(:last-child) {
+      margin-bottom: 2.5%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    &.active {
+      justify-content: start;
+      padding-top: 10%;
+
+      .navigations {
+        .list-navigation {
+          padding: 10% 0;
+        }
+      }
+
+      .social-media {
+        width: 50%;
+        margin-top: 25%;
+      }
+    }
+
+    &.active > *:not(:last-child) {
+      margin-bottom: 10%;
+    }
+  }
+}
+
+body.active {
+  overflow: hidden;
+}

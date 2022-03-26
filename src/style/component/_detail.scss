@@ -1,0 +1,219 @@
+@use "../default" as *;
+@use "../mixins/button" as btn;
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5% 10%;
+  position: relative;
+
+  .features {
+    text-align: center;
+    width: 48%;
+    margin-bottom: 5%;
+
+    .heading {
+      margin-bottom: 5%;
+    }
+
+    .text {
+      line-height: 3rem;
+    }
+  }
+
+  .tab {
+    display: flex;
+    margin-bottom: 5%;
+
+    .tab-features {
+      background-color: transparent;
+      border: none;
+      box-shadow: 0px -0.1rem 0px 0px $Grayish-Blue inset;
+      padding: 2.5rem 5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tab-features:hover {
+      color: $Soft-Red;
+    }
+
+    .tab-features.tab-active {
+      box-shadow: 0px -0.4rem 0px 0px $Soft-Red inset;
+      color: $Very-Dark-Blue;
+    }
+  }
+
+  .contain-features {
+    z-index: 2;
+    overflow: hidden;
+    height: 50vh;
+
+    .detail-feature {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      height: 100%;
+      overflow: hidden;
+
+      .feature-illustration {
+        width: 100%;
+        animation: scale-up-center 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      }
+
+      .text-detail-feature {
+        padding: 10%;
+        margin-top: 5%;
+        animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+        .text {
+          line-height: 2.5rem;
+        }
+
+        .more-info {
+          @include btn.button($bg: $Soft-Blue, $p: 3% 5%, $fs: 1.5rem);
+        }
+      }
+
+      .text-detail-feature > *:not(:last-child) {
+        margin-bottom: 5%;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    background-color: $Soft-Blue;
+    height: 45vh;
+    width: 40vw;
+    left: 0;
+    bottom: 0rem;
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 40%;
+    position: absolute;
+  }
+
+  @media (max-width: 1024px) {
+    & {
+      .features {
+        width: 80%;
+      }
+
+      .tab {
+        flex-direction: column;
+        width: 80%;
+
+        .tab-features {
+          box-shadow: none;
+          border-top: 1px solid $Grayish-Blue;
+        }
+
+        .tab-features:last-child {
+          border-bottom: 1px solid $Grayish-Blue;
+        }
+
+        .tab-features.tab-active {
+          box-shadow: none;
+          color: #252b46;
+          position: relative;
+        }
+
+        .tab-features.tab-active::after {
+          content: "";
+          display: inline-block;
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          width: 25%;
+          transform: translateX(-50%);
+          height: 5px;
+          box-shadow: 0px -0.4rem 0px 0px #fa5757 inset;
+        }
+      }
+
+      .contain-features {
+        height: auto;
+
+        .detail-feature {
+          grid-template-columns: 1fr;
+          justify-items: center;
+
+          .feature-illustration {
+            height: 100%;
+            width: auto;
+          }
+
+          .text-detail-feature {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    &::after {
+      bottom: auto;
+      top: 45%;
+      height: 55vh;
+      width: 60vw;
+    }
+  }
+
+  @media (max-width: 600px) {
+    & {
+      .features {
+        width: 100%;
+
+        .text {
+          font-size: 1.75rem;
+        }
+      }
+
+      .tab {
+        width: 100%;
+
+        .tab-features.tab-active::after {
+          width: 50%;
+        }
+      }
+
+      .contain-features {
+        .detail-feature {
+          .feature-illustration {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+    }
+
+    & > *:not(:last-child) {
+      margin-bottom: 15%;
+    }
+
+    &::after {
+      top: 50%;
+      height: 25vh;
+      width: 75vw;
+    }
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

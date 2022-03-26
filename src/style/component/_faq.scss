@@ -1,0 +1,92 @@
+@use "../default" as *;
+@use "../mixins/button" as btn;
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5% 10%;
+
+  .faq-text {
+    width: 45%;
+    text-align: center;
+
+    .text {
+      margin: 5% 0;
+      line-height: 3rem;
+    }
+  }
+
+  .faq-list {
+    width: 50%;
+
+    .accordion {
+      display: flex;
+      justify-content: space-between;
+      background-color: transparent;
+      width: 100%;
+      text-align: left;
+      font-size: 1.8rem;
+      cursor: pointer;
+      border: none;
+      border-top: 0.5px solid $Grayish-Blue;
+      padding: 2rem 0;
+      transition: 0.4s;
+
+      &.active .arrow {
+        transform: rotate(180deg);
+        path {
+          stroke: $Soft-Red;
+        }
+      }
+    }
+
+    .accordion:first-child {
+      border-top: none;
+    }
+
+    .accordion:last-of-type {
+      border-bottom: 0.5px solid $Grayish-Blue;
+    }
+
+    .accordion:hover {
+      color: $Soft-Red;
+    }
+
+    .panel {
+      max-height: 0;
+      font-size: 1.8rem;
+      line-height: 3rem;
+      color: $Grayish-Blue;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+  }
+
+  .more-info {
+    margin: 5% 0;
+    @include btn.button($bg: $Soft-Blue, $p: 1.5% 2%, $fs: 1.5rem);
+  }
+
+  @media (max-width: 600px) {
+    & {
+      padding: 10%;
+
+      .faq-text {
+        width: 100%;
+      }
+
+      .faq-list {
+        width: 100%;
+      }
+
+      .more-info {
+        padding: 5% 10%;
+      }
+    }
+
+    & > :not(:last-child) {
+      margin-bottom: 10%;
+    }
+  }
+}

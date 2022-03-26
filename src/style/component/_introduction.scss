@@ -1,0 +1,136 @@
+@use "../default" as *;
+@use "../mixins/button" as btn;
+
+.introduction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3.5% 2.5% 3.5% 10%;
+  position: relative;
+
+  .introduction-text {
+    width: 40%;
+
+    .title {
+      font-size: 4.5rem;
+      color: $Very-Dark-Blue;
+    }
+
+    .text {
+      line-height: 3rem;
+    }
+
+    .link-extension {
+      .chrome {
+        @include btn.button($bg: $Soft-Blue, $fs: 1.5rem, $p: 3% 4%);
+        margin-right: 2.5%;
+      }
+
+      .chrome:hover {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 0px 2px $Soft-Blue;
+        color: $Soft-Blue;
+      }
+
+      .firefox {
+        @include btn.button(
+          $bg: #ffffff,
+          $fs: 1.5rem,
+          $p: 3% 4%,
+          $c: $Grayish-Blue
+        );
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+
+      .firefox:hover {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 0px 2px $Grayish-Blue;
+        color: $Grayish-Blue;
+      }
+
+      .chrome,
+      .firefox {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .introduction-text > * {
+    margin: 5% 0;
+  }
+
+  .introduction-ilustrator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      z-index: 1;
+    }
+  }
+
+  .introduction-ilustrator::after {
+    content: "";
+    display: inline-block;
+    background-color: $Soft-Blue;
+    height: 45vh;
+    width: 35vw;
+    right: 0;
+    bottom: -0.25rem;
+    border-top-left-radius: 40%;
+    border-bottom-left-radius: 40%;
+    position: absolute;
+  }
+
+  @media (max-width: 1024px) {
+    & {
+      flex-direction: column-reverse;
+      padding: 3.5% 0;
+
+      .introduction-ilustrator {
+        &::after {
+          bottom: auto;
+          top: 20vh;
+          width: 70vw;
+          height: 50vh;
+          z-index: -1;
+        }
+      }
+
+      .introduction-text {
+        width: 80%;
+        text-align: center;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    & {
+      padding: 5% 0;
+
+      .introduction-text {
+        .title {
+          font-size: 3.5rem;
+        }
+        .text {
+          font-size: 1.75rem;
+        }
+      }
+
+      .introduction-text > * {
+        margin: 10% 0;
+      }
+
+      .introduction-ilustrator {
+        .hero {
+          width: 90%;
+        }
+      }
+      .introduction-ilustrator::after {
+        top: 10vh;
+        width: 70vw;
+        height: 20vh;
+      }
+    }
+  }
+}
